@@ -1,0 +1,307 @@
+@charset "utf-8";
+
+// ========== Variables ==========
+$page-maxi-width: 1280px;
+$text-color: #362929;
+$theme-colors: (
+  main: #e3ffd8,
+  gray: #e3e3e3,
+  green: #96e808,
+  blue: #58b7ff,
+  red: #ff3131,
+  purple: #c26bfb,
+);
+$breakpoints: (
+  phone: "screen and (max-width: 599px)",
+  tablet: "screen and (min-width: 600px)",
+  pc: "screen and (min-width: 1280px)"
+);
+
+// ========== Mixin ==========
+@mixin mq($breakpoint: tablet) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+@mixin box-size($width, $height) {
+  width: $width;
+  height: $height;
+}
+@mixin pseudo-el($display: block, $content: "") {
+  display: $display;
+  content: $content;
+}
+@mixin positioning(
+  $position: relative,
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $left: 0
+) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@mixin centering-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin centering-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ==============================
+Foundation
+============================== */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@400;700&display=swap");
+
+:root {
+  --main-color: #fff;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  color: $text-color;
+  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4em;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* ==============================
+Layout
+============================== */
+.l-navi {
+  &__inner {
+    margin: auto;
+    padding: 20px 0;
+    max-width: $page-maxi-width;
+  }
+}
+.l-main-visual {
+  padding: 96px 0;
+  background: url(../images/main-img.jpg) no-repeat center/cover;
+}
+.l-section {
+  padding: 40px 6.4%;
+  &--colored {
+    background-color: map-get($theme-colors, "main");
+  }
+}
+/* ==============================
+Object/Component
+============================== */
+.c-navi-link {
+  position: relative;
+  font-size: 1.6rem;
+  &::after {
+    @include pseudo-el(block, "");
+    @include centering-x();
+    @include box-size(40px, 2px);
+    bottom: -4px;
+    background-color: #000;
+  }
+  &--green::after {
+    @extend .c-navi-link::after;
+    background-color: map-get($theme-colors, green);
+  }
+  &--blue::after {
+    @extend .c-navi-link::after;
+    background-color: map-get($theme-colors, blue);
+  }
+  &--red::after {
+    @extend .c-navi-link::after;
+    background-color: map-get($theme-colors, red);
+  }
+  &--purple::after {
+    @extend .c-navi-link::after;
+    background-color: map-get($theme-colors, purple);
+  }
+}
+.c-section-title {
+  font-size: 2.4rem;
+  font-weight: normal;
+  text-align: center;
+}
+.c-section-title-sub {
+  position: relative;
+  margin-left: 8px;
+  width: 328px;
+  font-size: 1.6rem;
+  vertical-align: middle;
+  &::before {
+    @include pseudo-el(inline-block, "");
+    @include positioning(absolute, 50%, 0, 0, -8px);
+    @include box-size(2px, 20px);
+    background-color: #000;
+    transform: translateY(-50%);
+  }
+  &--green::after {
+    @extend .c-section-title-sub::before;
+    background-color: map-get($theme-colors, green);
+  }
+  &--blue::after {
+    @extend .c-section-title-sub::before;
+    background-color: map-get($theme-colors, blue);
+  }
+  &--red::after {
+    @extend .c-section-title-sub::before;
+    background-color: map-get($theme-colors, red);
+  }
+  &--purple::after {
+    @extend .c-section-title-sub::before;
+    background-color: map-get($theme-colors, purple);
+  }
+}
+.c-skill-item {
+  &__box {
+    display: flex;
+    padding: 16px;
+    width: 328px;
+    border-radius: 16px;
+    background-color: map-get($theme-colors, "main");
+    &--gray {
+      background-color: map-get($theme-colors, "gray");
+    }
+  }
+  &__icon {
+    @include box-size(48px, 48px);
+    margin-right: 28px;
+  }
+  &__text-wrapper {
+    width: 220px;
+  }
+  &__title {
+    margin: 0 76px 8px 0;
+    font-size: 2rem;
+    font-weight: normal;
+    text-align: center;
+    &--center-y {
+      margin: 0 76px 0 0;
+      padding-top: 10px;
+    }
+  }
+  &__text {
+    list-style: square inside;
+    font-size: 1.2rem;
+  }
+}
+/* ==============================
+Object/Project
+============================== */
+.p-navi {
+  &__items {
+    display: flex;
+    justify-content: center;
+  }
+  &__item {
+    &:not(:last-of-type) {
+      margin-right: 6.4%;
+    }
+  }
+}
+.p-main-title {
+  &__wrapper {
+    text-align: center;
+  }
+  &__text {
+    display: block;
+    &--big {
+      font-size: 3.2rem;
+    }
+    &--small {
+      font-size: 2.4rem;
+      font-weight: normal;
+    }
+  }
+}
+.p-profile-text {
+  &__wrapper {
+    max-width: 360px;
+  }
+  &__name {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+  &__text:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+}
+.p-skill {
+  &__wrapper {
+    margin: auto;
+    width: 328px;
+    @include mq(tablet) {
+      width: 100%;
+      max-width: 1280px;
+    }
+  }
+  &__items {
+    @include mq(tablet) {
+      display: grid;
+      grid-template-columns: 328px 328px;
+      gap: 20px;
+      justify-content: center;
+    }
+    @include mq(pc) {
+      grid-template-columns: 328px 328px 328px;
+    }
+  }
+  &__item {
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+      @include mq(tablet) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+.p-works-items {
+  &__wrapper {
+    margin: auto;
+    width: 328px;
+  }
+  &__title {
+    margin-bottom: 32px;
+  }
+}
+.p-google-form {
+  position: relative;
+  iframe {
+    @include positioning(absolute, 0, auto, auto, 0);
+    width: 100%;
+  }
+}
+/* ==============================
+Object/Utility
+============================== */
+.u-mgn {
+  &-auto {
+    margin: auto;
+  }
+  &-bottom-l {
+    margin-bottom: 40px;
+  }
+  &-bottom-m {
+    margin-bottom: 32px;
+  }
+  &-bottom-s {
+    margin-bottom: 20px;
+  }
+}

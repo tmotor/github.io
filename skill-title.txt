@@ -1,0 +1,8 @@
+HTML
+CSS
+Sass
+JavaScript
+Python
+Linux
+XD
+Git, GitHub
