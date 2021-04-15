@@ -340,6 +340,10 @@ Object/Project
   margin-bottom: 32px;
 }
 
+.p-works__item {
+  line-height: 1.8;
+}
+
 .p-google-form {
   position: relative;
 }
