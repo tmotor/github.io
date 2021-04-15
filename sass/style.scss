@@ -1,11 +1,11 @@
 @charset "utf-8";
 
 // ========== Variables ==========
-$page-maxi-width: 1280px;
+$page-max-width: 1280px;
 $text-color: #362929;
 $theme-colors: (
-  main: #e3ffd8,
-  gray: #e3e3e3,
+  main: #efffff,
+  gray: #f3f3f3,
   green: #96e808,
   blue: #58b7ff,
   red: #ff3131,
@@ -13,10 +13,13 @@ $theme-colors: (
 );
 $breakpoints: (
   phone: "screen and (max-width: 599px)",
-  tablet: "screen and (min-width: 600px)",
-  pc: "screen and (min-width: 1280px)"
+  tablet: "screen and (min-width: 780px)",
+  pc: "screen and (min-width: 1184px)",
 );
-
+$contants-max-width: (
+  tablet: 780px,
+  pc: 1032px
+);
 // ========== Mixin ==========
 @mixin mq($breakpoint: tablet) {
   @media #{map-get($breakpoints, $breakpoint)} {
@@ -64,6 +67,7 @@ Foundation
   --main-color: #fff;
 }
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%;
 }
 body {
@@ -91,7 +95,7 @@ Layout
   &__inner {
     margin: auto;
     padding: 20px 0;
-    max-width: $page-maxi-width;
+    max-width: $page-max-width;
   }
 }
 .l-main-visual {
@@ -142,7 +146,6 @@ Object/Component
 .c-section-title-sub {
   position: relative;
   margin-left: 8px;
-  width: 328px;
   font-size: 1.6rem;
   vertical-align: middle;
   &::before {
@@ -175,9 +178,9 @@ Object/Component
     padding: 16px;
     width: 328px;
     border-radius: 16px;
-    background-color: map-get($theme-colors, "main");
+    background-color: map-get($theme-colors, main);
     &--gray {
-      background-color: map-get($theme-colors, "gray");
+      background-color: map-get($theme-colors, gray);
     }
   }
   &__icon {
@@ -202,6 +205,33 @@ Object/Component
     font-size: 1.2rem;
   }
 }
+
+/* 上に戻るボタン */
+.c-to-top-button {
+  @include positioning(fixed, auto, 20px, 20px, auto);
+  @include box-size(44px, 44px);
+  opacity: 0;
+  border: 2px solid #3d3d3d;
+  border-radius: 100%;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.fadein {
+  opacity: 1;
+}
+.c-to-top-button::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%) rotate(45deg);
+  width: 40%;
+  height: 40%;
+  border-top: 2px solid #3d3d3d;
+  border-left: 2px solid #3d3d3d;
+  content: "";
+}
 /* ==============================
 Object/Project
 ============================== */
@@ -224,10 +254,16 @@ Object/Project
     display: block;
     &--big {
       font-size: 3.2rem;
+      @include mq(tablet) {
+        font-size: 4rem;
+      }
     }
     &--small {
       font-size: 2.4rem;
       font-weight: normal;
+      @include mq(tablet) {
+        font-size: 3.2rem;
+      }
     }
   }
 }
@@ -246,36 +282,37 @@ Object/Project
 .p-skill {
   &__wrapper {
     margin: auto;
-    width: 328px;
+    max-width: 328px;
     @include mq(tablet) {
-      width: 100%;
-      max-width: 1280px;
+      max-width: 680px;
+    }
+    @include mq(pc) {
+      max-width: 1032px;
     }
   }
   &__items {
+    display: grid;
+    gap: 24px;
+    justify-items: center;
     @include mq(tablet) {
-      display: grid;
-      grid-template-columns: 328px 328px;
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, 328px);
       justify-content: center;
-    }
-    @include mq(pc) {
-      grid-template-columns: 328px 328px 328px;
-    }
-  }
-  &__item {
-    &:not(:last-of-type) {
-      margin-bottom: 20px;
-      @include mq(tablet) {
-        margin-bottom: 0;
-      }
+      margin: auto;
     }
   }
 }
-.p-works-items {
-  &__wrapper {
+.p-works {
+  &__wrappers {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 328px;
+    justify-content: center;
     margin: auto;
-    width: 328px;
+    max-width: 1032px;
+    @include mq(tablet) {
+      grid-template-columns: repeat(auto-fit, 328px);
+      justify-content: center;
+    }
   }
   &__title {
     margin-bottom: 32px;
@@ -304,4 +341,16 @@ Object/Utility
   &-bottom-s {
     margin-bottom: 20px;
   }
+}
+.u-green {
+  color: map-get($theme-colors, green);
+}
+.u-blue {
+  color: map-get($theme-colors, blue);
+}
+.u-red {
+  color: map-get($theme-colors, red);
+}
+.u-purple {
+  color: map-get($theme-colors, purple);
 }

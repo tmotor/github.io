@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==============================
 Foundation
 ============================== */
@@ -7,6 +8,7 @@ Foundation
 }
 
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%;
 }
 
@@ -51,7 +53,7 @@ Layout
 }
 
 .l-section--colored {
-  background-color: #e3ffd8;
+  background-color: #efffff;
 }
 
 /* ==============================
@@ -100,7 +102,6 @@ Object/Component
 .c-section-title-sub {
   position: relative;
   margin-left: 8px;
-  width: 328px;
   font-size: 1.6rem;
   vertical-align: middle;
 }
@@ -144,7 +145,11 @@ Object/Component
   padding: 16px;
   width: 328px;
   border-radius: 16px;
-  background-color: #e3ffd8;
+  background-color: #efffff;
+}
+
+.c-skill-item__box--gray {
+  background-color: #f3f3f3;
 }
 
 .c-skill-item__icon {
@@ -172,6 +177,42 @@ Object/Component
 .c-skill-item__text {
   list-style: square inside;
   font-size: 1.2rem;
+}
+
+/* 上に戻るボタン */
+.c-to-top-button {
+  position: fixed;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  border: 2px solid #3d3d3d;
+  border-radius: 100%;
+  background-color: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.fadein {
+  opacity: 1;
+}
+
+.c-to-top-button::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -30%) rotate(45deg);
+          transform: translate(-50%, -30%) rotate(45deg);
+  width: 40%;
+  height: 40%;
+  border-top: 2px solid #3d3d3d;
+  border-left: 2px solid #3d3d3d;
+  content: "";
 }
 
 /* ==============================
@@ -204,9 +245,21 @@ Object/Project
   font-size: 3.2rem;
 }
 
+@media screen and (min-width: 780px) {
+  .p-main-title__text--big {
+    font-size: 4rem;
+  }
+}
+
 .p-main-title__text--small {
   font-size: 2.4rem;
   font-weight: normal;
+}
+
+@media screen and (min-width: 780px) {
+  .p-main-title__text--small {
+    font-size: 3.2rem;
+  }
 }
 
 .p-profile-text__wrapper {
@@ -224,23 +277,58 @@ Object/Project
 
 .p-skill__wrapper {
   margin: auto;
-  width: 328px;
+  max-width: 328px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 780px) {
   .p-skill__wrapper {
-    width: 100%;
-    max-width: 1280px;
+    max-width: 680px;
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1184px) {
+  .p-skill__wrapper {
+    max-width: 1032px;
+  }
+}
+
+.p-skill__items {
+  display: -ms-grid;
+  display: grid;
+  gap: 24px;
+  justify-items: center;
+}
+
+@media screen and (min-width: 780px) {
   .p-skill__items {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 328px 328px;
-        grid-template-columns: 328px 328px;
-    gap: 20px;
+    -ms-grid-columns: (328px)[auto-fill];
+        grid-template-columns: repeat(auto-fill, 328px);
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin: auto;
+  }
+}
+
+.p-works__wrappers {
+  display: -ms-grid;
+  display: grid;
+  gap: 24px;
+  -ms-grid-columns: 328px;
+      grid-template-columns: 328px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  max-width: 1032px;
+}
+
+@media screen and (min-width: 780px) {
+  .p-works__wrappers {
+    -ms-grid-columns: (328px)[auto-fit];
+        grid-template-columns: repeat(auto-fit, 328px);
     -webkit-box-pack: center;
     -webkit-justify-content: center;
         -ms-flex-pack: center;
@@ -248,29 +336,7 @@ Object/Project
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .p-skill__items {
-    -ms-grid-columns: 328px 328px 328px;
-        grid-template-columns: 328px 328px 328px;
-  }
-}
-
-.p-skill__item:not(:last-of-type) {
-  margin-bottom: 20px;
-}
-
-@media screen and (min-width: 600px) {
-  .p-skill__item:not(:last-of-type) {
-    margin-bottom: 0;
-  }
-}
-
-.p-works-items__wrapper {
-  margin: auto;
-  width: 328px;
-}
-
-.p-works-items__title {
+.p-works__title {
   margin-bottom: 32px;
 }
 
@@ -304,5 +370,21 @@ Object/Utility
 
 .u-mgn-bottom-s {
   margin-bottom: 20px;
+}
+
+.u-green {
+  color: #96e808;
+}
+
+.u-blue {
+  color: #58b7ff;
+}
+
+.u-red {
+  color: #ff3131;
+}
+
+.u-purple {
+  color: #c26bfb;
 }
 /*# sourceMappingURL=style.css.map */
