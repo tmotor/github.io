@@ -1,71 +1,18 @@
 @charset "utf-8";
 
 // ========== Variables ==========
-$page-max-width: 1280px;
-$text-color: #362929;
-$theme-colors: (
-  main: #efffff,
-  gray: #f3f3f3,
-  green: #96e808,
-  blue: #58b7ff,
-  red: #ff3131,
-  purple: #c26bfb,
-);
-$breakpoints: (
-  phone: "screen and (max-width: 599px)",
-  tablet: "screen and (min-width: 780px)",
-  pc: "screen and (min-width: 1184px)",
-);
-$contants-max-width: (
-  tablet: 680px,
-  pc: 1032px
-);
+@import "foundation/variables.scss";
+
 // ========== Mixin ==========
-@mixin mq($breakpoint: tablet) {
-  @media #{map-get($breakpoints, $breakpoint)} {
-    @content;
-  }
-}
-@mixin box-size($width, $height) {
-  width: $width;
-  height: $height;
-}
-@mixin pseudo-el($display: block, $content: "") {
-  display: $display;
-  content: $content;
-}
-@mixin positioning(
-  $position: relative,
-  $top: 0,
-  $right: 0,
-  $bottom: 0,
-  $left: 0
-) {
-  position: $position;
-  top: $top;
-  right: $right;
-  bottom: $bottom;
-  left: $left;
-}
-@mixin centering-x {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@mixin centering-y {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
+@import "foundation/mixin.scss";
 
 /* ==============================
 Foundation
 ============================== */
+
+// Google Fonts
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@400;700&display=swap");
 
-:root {
-  --main-color: #fff;
-}
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
@@ -99,7 +46,8 @@ Layout
   }
 }
 .l-main-visual {
-  padding: 96px 0;
+  position: relative;
+  height: 60vh;
   background: url(../images/main-img.jpg) no-repeat center/cover;
 }
 .l-section {
@@ -248,6 +196,7 @@ Object/Project
 }
 .p-main-title {
   &__wrapper {
+    @include box-size(auto, 108px);
     text-align: center;
   }
   &__text {
@@ -345,6 +294,10 @@ Object/Utility
     margin-bottom: 20px;
   }
 }
+.u-centering-xy {
+  @include positioning(absolute, 0, 0, 0, 0);
+  margin: auto;
+}
 .u-green {
   color: map-get($theme-colors, green);
 }
@@ -356,4 +309,41 @@ Object/Utility
 }
 .u-purple {
   color: map-get($theme-colors, purple);
+}
+/* ==============================
+JavaScript
+============================== */
+.js-scrollanime {
+  opacity: 0;
+}
+.js-fadeInDown {
+  animation-name: js-fadeInDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes js-fadeInDown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.js-updown {
+  transform: translateY(-100px);
+}
+.js-downup {
+  transform: translateY(100px);
+}
+
+.js-sect02 {
+  overflow: hidden;
+}
+.js-slide-right {
+  transform: translateY(200px);
+}
+.js-slide-left {
+  transform: translateX(-200px);
 }

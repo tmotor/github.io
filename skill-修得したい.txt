@@ -1,6 +1,0 @@
-PHP
-Node.js
-MySQL
-WordPress
-Bootstrap
-Vue.js

@@ -1,0 +1,36 @@
+@mixin mq($breakpoint: tablet) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+@mixin box-size($width, $height) {
+  width: $width;
+  height: $height;
+}
+@mixin pseudo-el($display: block, $content: "") {
+  display: $display;
+  content: $content;
+}
+@mixin positioning(
+  $position: relative,
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $left: 0
+) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@mixin centering-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin centering-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

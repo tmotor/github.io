@@ -1,0 +1,20 @@
+$page-max-width: 1280px;
+$text-color: #362929;
+$theme-colors: (
+  main: #efffff,
+  gray: #f3f3f3,
+  green: #96e808,
+  blue: #58b7ff,
+  red: #ff3131,
+  purple: #c26bfb,
+);
+$breakpoints: (
+  phone: "screen and (max-width: 599px)",
+  tablet: "screen and (min-width: 780px)",
+  pc: "screen and (min-width: 1184px)",
+);
+$contants-max-width: (
+  tablet: 680px,
+  pc: 1032px,
+);
+
